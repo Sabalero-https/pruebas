@@ -34,7 +34,8 @@ var AJUSTES = [
   ['acciones', 'Acciones por estado'],
   ['agruparPor', 'Agrupar resultados por'],
   ['prefijoWhatsapp', 'Prefijo WhatsApp'],
-  ['color', 'Color principal']
+  ['color', 'Color principal'],
+  ['tema', 'Tema']
 ];
 
 var OPCIONES_ESTADO = ['Nuevo', 'Contactado', 'Turno agendado', 'Asistió', 'No asistió', 'No le interesa'];
@@ -292,7 +293,8 @@ function leerConfig_() {
     acciones: parsearAcciones_(a.acciones),
     agruparPor: lista_(a.agruparPor),
     prefijoWhatsapp: texto_(a.prefijoWhatsapp).replace(/\D/g, ''),
-    color: /^#[0-9a-f]{6}$/i.test(texto_(a.color)) ? texto_(a.color) : '#8a4f9e'
+    color: /^#[0-9a-f]{6}$/i.test(texto_(a.color)) ? texto_(a.color) : '#8a4f9e',
+    tema: normalizarTema_(a.tema)
   };
 
   return { campos: campos, ajustes: ajustes, metricas: metricas };
@@ -397,7 +399,8 @@ function crearConfig_(ss) {
       .map(function (o) { return o + ': Recontactar'; }).join(', '),
     agruparPor: agrupar.join(', '),
     prefijoWhatsapp: '549',
-    color: '#8a4f9e'
+    color: '#8a4f9e',
+    tema: 'claro'
   };
 
   escribirConfig_(ss, campos, ajustes, metricas);
@@ -474,7 +477,8 @@ function escribirConfig_(ss, campos, ajustes, metricas) {
   hoja.getRange(1, ba).setNote('"Estados a seguir" son los que aparecen por defecto en la pestaña Seguimiento.\n' +
     '"Acciones por estado": qué hay que hacer con un lead en ese estado, por ejemplo "No asistió: Recontactar". ' +
     'Esos leads también aparecen en "A seguir" y tienen su propio filtro.\n' +
-    '"Prefijo WhatsApp": 549 para celulares de Argentina.');
+    '"Prefijo WhatsApp": 549 para celulares de Argentina.\n' +
+    '"Tema": claro, oscuro o automático (sigue la configuración de cada dispositivo).');
 }
 
 // ---------------------------------------------------------------------------
@@ -717,6 +721,14 @@ function parsearAcciones_(v) {
     var m = /^(.+?)\s*[:=]\s*(.+)$/.exec(par);
     return m ? { estado: m[1].trim(), accion: m[2].trim() } : null;
   }).filter(Boolean);
+}
+
+/** 'claro' (también si está vacío), 'oscuro' o 'auto'. */
+function normalizarTema_(v) {
+  var s = norm_(v);
+  if (/^(oscuro|dark)/.test(s)) return 'oscuro';
+  if (/^(auto|sistema|dispositivo)/.test(s)) return 'auto';
+  return 'claro';
 }
 
 function esSiNo_(opciones) {

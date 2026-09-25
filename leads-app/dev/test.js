@@ -229,6 +229,22 @@ prueba('un campo oculto con valor por defecto se completa solo en leads nuevos',
   assert.equal(lead.v['Origen'], '');
 });
 
+prueba('tema: claro por defecto, oscuro o automático desde Config', function () {
+  var g = entorno();
+  var ss = g.Semilla.crear();
+  g.configurarPlanilla();
+  assert.equal(g.leerConfig_().ajustes.tema, 'claro');
+  var config = ss.getSheetByName('Config');
+  var fila = config.getRange(1, 10, 20, 1).getValues().map(function (f) { return f[0]; }).indexOf('Tema') + 1;
+  assert.ok(fila > 1, 'la Config nueva trae la fila Tema');
+  config.getRange(fila, 11).setValue('Automático');
+  assert.equal(g.leerConfig_().ajustes.tema, 'auto');
+  config.getRange(fila, 11).setValue('oscuro');
+  assert.equal(g.leerConfig_().ajustes.tema, 'oscuro');
+  config.getRange(fila, 10, 1, 2).setValues([['', '']]); // Config vieja, sin la fila
+  assert.equal(g.leerConfig_().ajustes.tema, 'claro');
+});
+
 prueba('actualizar un ID que no existe da un error claro', function () {
   var g = entorno();
   g.Semilla.crear();

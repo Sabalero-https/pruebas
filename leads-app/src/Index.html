@@ -429,6 +429,9 @@
   function aplicarMarca() {
     var a = cfg().ajustes;
     document.documentElement.style.setProperty('--brand', a.color);
+    var temas = { claro: 'light', oscuro: 'dark' };
+    if (temas[a.tema]) document.documentElement.setAttribute('data-theme', temas[a.tema]);
+    else document.documentElement.removeAttribute('data-theme');
     $('#titulo').textContent = a.titulo;
     document.title = a.titulo;
   }

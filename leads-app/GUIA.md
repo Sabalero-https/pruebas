@@ -108,7 +108,8 @@ El orden de las filas es el orden del formulario.
 | Acciones por estado | Qué hay que hacer con un lead según su estado, con el formato `Estado: Acción` separado por comas. Ejemplo: `No asistió: Recontactar`. La acción se ve como etiqueta en la tarjeta, tiene su propio filtro en *Seguimiento* y esos leads también entran en "A seguir". El estado no cambia. |
 | Agrupar resultados por | Campos para los desgloses de *Resultados* (además del estado). |
 | Prefijo WhatsApp | Se antepone al teléfono para el link de WhatsApp. `549` = celulares de Argentina. |
-| Color principal | Color de la app en formato `#rrggbb`. |
+| Color principal | Color de la app en formato `#rrggbb` (el código de color de la marca). |
+| Tema | `claro` (si se deja vacío, también), `oscuro` o `automático` (sigue la configuración de cada celular o computadora). |
 
 ### Métricas (columnas M a O)
 
