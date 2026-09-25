@@ -225,6 +225,22 @@ prueba('configurarPlanilla no abre cuadros de diálogo (desde el editor se colga
   assert.equal(g.MockGAS.alertas.length, 1, 'desde el menú sí muestra el resultado');
 });
 
+prueba('acciones por estado: se leen de Config y se proponen al crearla', function () {
+  var g = entorno();
+  var ss = g.Semilla.crear({ conDesplegableEstado: false });
+  g.configurarPlanilla();
+  assert.deepEqual(plano(g.leerConfig_().ajustes.acciones), [{ estado: 'No asistió', accion: 'Recontactar' }]);
+  // Una Config vieja no tiene la fila: se agrega a mano debajo de los otros ajustes.
+  var config = ss.getSheetByName('Config');
+  var filas = config.getRange(1, 10, 20, 1).getValues().map(function (f) { return f[0]; });
+  var fila = filas.indexOf('Acciones por estado') + 1;
+  config.getRange(fila, 10, 1, 2).setValues([['', '']]);
+  assert.deepEqual(plano(g.leerConfig_().ajustes.acciones), []);
+  config.getRange(20, 10, 1, 2).setValues([['acciones por estado', 'No asistió: Recontactar, Nuevo = Llamar, basura']]);
+  assert.deepEqual(plano(g.leerConfig_().ajustes.acciones), [
+    { estado: 'No asistió', accion: 'Recontactar' }, { estado: 'Nuevo', accion: 'Llamar' }]);
+});
+
 prueba('sin hoja Config el error explica qué hacer', function () {
   var g = entorno();
   g.Semilla.crear();

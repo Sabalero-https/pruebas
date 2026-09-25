@@ -31,6 +31,7 @@ var AJUSTES = [
   ['campoTelefono', 'Campo de teléfono'],
   ['campoEstado', 'Campo de estado'],
   ['estadosSeguir', 'Estados a seguir'],
+  ['acciones', 'Acciones por estado'],
   ['agruparPor', 'Agrupar resultados por'],
   ['prefijoWhatsapp', 'Prefijo WhatsApp'],
   ['color', 'Color principal']
@@ -278,6 +279,7 @@ function leerConfig_() {
     campoTelefono: texto_(a.campoTelefono) || primero('telefono'),
     campoEstado: texto_(a.campoEstado),
     estadosSeguir: lista_(a.estadosSeguir),
+    acciones: parsearAcciones_(a.acciones),
     agruparPor: lista_(a.agruparPor),
     prefijoWhatsapp: texto_(a.prefijoWhatsapp).replace(/\D/g, ''),
     color: /^#[0-9a-f]{6}$/i.test(texto_(a.color)) ? texto_(a.color) : '#8a4f9e'
@@ -381,6 +383,8 @@ function crearConfig_(ss) {
     campoTelefono: telefono ? telefono.nombre : '',
     campoEstado: estado.nombre,
     estadosSeguir: seguir.join(', '),
+    acciones: estado.opciones.filter(function (o) { return /^no (asisti|vino|se present)/.test(norm_(o)); })
+      .map(function (o) { return o + ': Recontactar'; }).join(', '),
     agruparPor: agrupar.join(', '),
     prefijoWhatsapp: '549',
     color: '#8a4f9e'
@@ -457,7 +461,10 @@ function escribirConfig_(ss, campos, ajustes, metricas) {
   hoja.getRange(1, bc + 6).setNote('Ejemplo: Agendo turno = Si\nEl campo solo aparece cuando se cumple la condición. Se pueden poner varios valores separados por coma.');
   hoja.getRange(1, bc + 7).setNote('Tildar para ocultar un campo de la app sin borrar la columna ni sus datos.');
   hoja.getRange(1, bm + 2).setNote('Valores (separados por coma) que cuentan para esta métrica. El % se calcula sobre el total de leads.');
-  hoja.getRange(1, ba).setNote('"Estados a seguir" son los que aparecen por defecto en la pestaña Seguimiento.\n"Prefijo WhatsApp": 549 para celulares de Argentina.');
+  hoja.getRange(1, ba).setNote('"Estados a seguir" son los que aparecen por defecto en la pestaña Seguimiento.\n' +
+    '"Acciones por estado": qué hay que hacer con un lead en ese estado, por ejemplo "No asistió: Recontactar". ' +
+    'Esos leads también aparecen en "A seguir" y tienen su propio filtro.\n' +
+    '"Prefijo WhatsApp": 549 para celulares de Argentina.');
 }
 
 // ---------------------------------------------------------------------------
@@ -680,6 +687,14 @@ function parsearCondicion_(v) {
   var campo = s.slice(0, i).trim();
   var valores = lista_(s.slice(i + 1));
   return campo && valores.length ? { campo: campo, valores: valores } : null;
+}
+
+/** "No asistió: Recontactar, Nuevo: Llamar" -> [{ estado: 'No asistió', accion: 'Recontactar' }, ...] */
+function parsearAcciones_(v) {
+  return lista_(v).map(function (par) {
+    var m = /^(.+?)\s*[:=]\s*(.+)$/.exec(par);
+    return m ? { estado: m[1].trim(), accion: m[2].trim() } : null;
+  }).filter(Boolean);
 }
 
 function esSiNo_(opciones) {

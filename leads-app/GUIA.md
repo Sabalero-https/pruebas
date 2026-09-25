@@ -105,6 +105,7 @@ El orden de las filas es el orden del formulario.
 | Campo de fecha de carga | Qué fecha se usa para agrupar por mes en *Resultados*. |
 | Campo de nombre / teléfono / estado | Qué campos cumplen esos roles (título de la tarjeta, WhatsApp y duplicados, filtros). |
 | Estados a seguir | Estados que aparecen en el filtro "A seguir" de *Seguimiento*. |
+| Acciones por estado | Qué hay que hacer con un lead según su estado, con el formato `Estado: Acción` separado por comas. Ejemplo: `No asistió: Recontactar`. La acción se ve como etiqueta en la tarjeta, tiene su propio filtro en *Seguimiento* y esos leads también entran en "A seguir". El estado no cambia. |
 | Agrupar resultados por | Campos para los desgloses de *Resultados* (además del estado). |
 | Prefijo WhatsApp | Se antepone al teléfono para el link de WhatsApp. `549` = celulares de Argentina. |
 | Color principal | Color de la app en formato `#rrggbb`. |
@@ -128,6 +129,9 @@ Ejemplos:
 - **Agregar un estado:** sumarlo en *Opciones* de `Estado` (y en *Estados a seguir* si corresponde).
   Si la columna Estado de *Leads* tiene un desplegable, conviene agregarlo ahí también.
 - **Dejar de pedir un dato:** tildar *Ocultar* en esa fila.
+- **Marcar a quién recontactar:** en Ajustes, fila *Acciones por estado* → `No asistió: Recontactar`.
+  Si la Config se creó antes de que existiera este ajuste, agregar la fila a mano debajo de *Color principal*
+  (columna J: `Acciones por estado`, columna K: el valor).
 
 > ⚠️ **Renombrar** un campo en Config sin renombrar la columna en *Leads* hace que la app cree una columna nueva
 > (vacía). Si se renombra, hacerlo en los dos lugares.
