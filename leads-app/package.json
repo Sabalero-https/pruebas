@@ -1,0 +1,9 @@
+{
+  "name": "leads-app",
+  "private": true,
+  "description": "App de seguimiento de leads sobre Google Sheets (Apps Script)",
+  "scripts": {
+    "test": "node dev/test.js",
+    "vista-previa": "node dev/armar-vista-previa.js"
+  }
+}
