@@ -185,10 +185,20 @@ function guardarLead(datos) {
     var filaEnc = cfg.ajustes.filaEncabezados;
     var tz = hoja.getParent().getSpreadsheetTimeZone();
 
+    var valores = datos.valores;
+    // Un lead nuevo recibe el valor por defecto de los campos que no vinieron del
+    // formulario, incluidos los ocultos: así se puede ocultar "Fecha" y que se complete sola.
+    var defectos = datos.id ? [] : valoresPorDefecto_(cfg, valores, tz);
+    if (defectos.length) {
+      valores = {};
+      Object.keys(datos.valores).forEach(function (k) { valores[k] = datos.valores[k]; });
+      defectos.forEach(function (d) { valores[d.campo.nombre] = d.valor; });
+    }
     var campos = cfg.campos.filter(function (c) {
-      return c.activo && Object.prototype.hasOwnProperty.call(datos.valores, c.nombre);
+      return (c.activo && Object.prototype.hasOwnProperty.call(valores, c.nombre)) ||
+        defectos.some(function (d) { return d.campo === c; });
     });
-    validarObligatorios_(cfg, datos.valores);
+    validarObligatorios_(cfg, valores);
 
     asegurarColumnas_(hoja, filaEnc, campos.map(function (c) { return c.nombre; }));
     var mapa = mapaColumnas_(hoja, filaEnc);
@@ -206,7 +216,7 @@ function guardarLead(datos) {
     }
 
     campos.forEach(function (c) {
-      escribirCelda_(hoja.getRange(fila, mapa[norm_(c.nombre)]), c, datos.valores[c.nombre]);
+      escribirCelda_(hoja.getRange(fila, mapa[norm_(c.nombre)]), c, valores[c.nombre]);
     });
     SpreadsheetApp.flush();
 
@@ -607,6 +617,18 @@ function escribirCelda_(celda, campo, valor) {
       // Texto plano: evita que "+54..." o "=..." se interpreten como fórmula o número.
       celda.setNumberFormat('@').setValue(s);
   }
+}
+
+/** [{ campo, valor }] de los campos con "Por defecto" que no vinieron en `valores`. */
+function valoresPorDefecto_(cfg, valores, tz) {
+  return cfg.campos.filter(function (c) {
+    return c.porDefecto && !Object.prototype.hasOwnProperty.call(valores, c.nombre) &&
+      (!c.mostrarSi || condicionCumplida_(c.mostrarSi, valores));
+  }).map(function (c) {
+    var v = c.porDefecto;
+    if (c.tipo === 'fecha' && norm_(v) === 'hoy') v = Utilities.formatDate(new Date(), tz, 'yyyy-MM-dd');
+    return { campo: c, valor: v };
+  });
 }
 
 function validarObligatorios_(cfg, valores) {

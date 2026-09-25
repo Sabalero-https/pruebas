@@ -209,6 +209,26 @@ prueba('un campo oculto en Config no se escribe', function () {
   assert.equal(ss.getSheetByName('Leads').getRange(lead.fila, 9).getValue(), '');
 });
 
+prueba('un campo oculto con valor por defecto se completa solo en leads nuevos', function () {
+  var g = entorno();
+  var ss = g.Semilla.crear();
+  g.configurarPlanilla();
+  var config = ss.getSheetByName('Config');
+  config.getRange(2, 8).setValue(true); // Ocultar Fecha (por defecto: hoy)
+  config.getRange(9, 6).setValue('Anuncio de Meta'); // Origen por defecto
+  var lead = g.guardarLead({ id: '', valores: { 'Nombre y Apellido': 'Sin fecha', 'Telefono': '9', 'Estado': 'Consulta' } });
+  assert.equal(lead.v['Fecha'], g.obtenerDatos().hoy);
+  assert.equal(lead.v['Origen'], 'Anuncio de Meta');
+  // Si el formulario manda el campo, gana lo que mandó.
+  lead = g.guardarLead({ id: '', valores: { 'Nombre y Apellido': 'Con origen', 'Telefono': '8', 'Estado': 'Consulta', 'Origen': 'Google' } });
+  assert.equal(lead.v['Origen'], 'Google');
+  // Al editar no se aplican valores por defecto.
+  var hoja = ss.getSheetByName('Leads');
+  hoja.getRange(lead.fila, 9).setValue('');
+  lead = g.guardarLead({ id: lead.id, valores: { 'Estado': 'Turno agendado' } });
+  assert.equal(lead.v['Origen'], '');
+});
+
 prueba('actualizar un ID que no existe da un error claro', function () {
   var g = entorno();
   g.Semilla.crear();
