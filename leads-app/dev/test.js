@@ -216,6 +216,15 @@ prueba('actualizar un ID que no existe da un error claro', function () {
   assert.throws(function () { g.guardarLead({ id: 'noexiste', valores: { 'Estado': 'Consulta' } }); }, /No encontré ese lead/);
 });
 
+prueba('configurarPlanilla no abre cuadros de diálogo (desde el editor se colgaría)', function () {
+  var g = entorno();
+  g.Semilla.crear();
+  g.configurarPlanilla();
+  assert.equal(g.MockGAS.alertas.length, 0);
+  g.configurarPlanillaDesdeMenu();
+  assert.equal(g.MockGAS.alertas.length, 1, 'desde el menú sí muestra el resultado');
+});
+
 prueba('sin hoja Config el error explica qué hacer', function () {
   var g = entorno();
   g.Semilla.crear();

@@ -155,6 +155,7 @@
     return h;
   };
   Planilla.prototype.getSpreadsheetTimeZone = function () { return this.tz; };
+  Planilla.prototype.toast = function () {};
 
   var activa = new Planilla();
   var alertas = [];

@@ -33,6 +33,8 @@ Lo hace quien administra la planilla, desde una computadora.
      scripts propios: el código solo accede a esta planilla.
    - Esto crea la hoja **Config**, agrega la columna **Origen** a *Leads* y una columna **ID**
      oculta al final (la app la usa para identificar cada fila; no borrarla).
+   - Tarda unos segundos. El resultado se ve en el **Registro de ejecución** del editor y en un aviso
+     abajo a la derecha de la planilla.
 4. Volver a la planilla y revisar la hoja **Config** (ver sección 3). Al recargar la planilla aparece
    el menú **App de Leads**, con el que se puede repetir este paso cuando haga falta.
 5. Publicar la app: en el editor, **Implementar → Nueva implementación**.

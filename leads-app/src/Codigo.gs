@@ -59,7 +59,7 @@ function doGet() {
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('App de Leads')
-    .addItem('Configurar / revisar planilla', 'configurarPlanilla')
+    .addItem('Configurar / revisar planilla', 'configurarPlanillaDesdeMenu')
     .addItem('Ver link de la app', 'mostrarLinkApp')
     .addToUi();
 }
@@ -76,10 +76,21 @@ function mostrarLinkApp() {
   }
 }
 
+/** Igual que configurarPlanilla, pero muestra el resultado en un cuadro (el menú corre con la planilla a la vista). */
+function configurarPlanillaDesdeMenu() {
+  var partes = configurarPlanilla();
+  var ui = SpreadsheetApp.getUi();
+  ui.alert('App de Leads', partes.join('\n\n'), ui.ButtonSet.OK);
+}
+
 /**
  * Crea la hoja Config a partir de las columnas actuales (si no existe) y deja la
  * hoja de datos lista: columnas faltantes, columna ID oculta e IDs completos.
  * Se puede correr todas las veces que haga falta; nunca pisa una Config existente.
+ *
+ * No abre cuadros de diálogo: corrida desde el editor, un alert() queda esperando en la
+ * pestaña de la planilla hasta que se agota el tiempo de ejecución. El resultado va al
+ * registro de ejecución y a un aviso breve en la planilla.
  */
 function configurarPlanilla() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -103,12 +114,8 @@ function configurarPlanilla() {
   var url = ScriptApp.getService().getUrl();
   if (url) partes.push('Link de la app: ' + url);
 
-  try {
-    var ui = SpreadsheetApp.getUi();
-    ui.alert('App de Leads', partes.join('\n\n'), ui.ButtonSet.OK);
-  } catch (e) {
-    Logger.log(partes.join('\n'));
-  }
+  console.log(partes.join('\n\n'));
+  ss.toast(creada ? 'Listo: se creó la hoja Config.' : 'Listo: la planilla ya estaba configurada.', 'App de Leads', 8);
   return partes;
 }
 
