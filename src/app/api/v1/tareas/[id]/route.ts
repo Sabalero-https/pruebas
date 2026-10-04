@@ -16,7 +16,7 @@ export const GET = conApi<P>(async (req, { db, params }) => {
   });
 });
 
-/** PATCH — cambios parciales. Mandá "version" para que falle (409) si alguien la modificó desde que la leíste. */
+/** PATCH: cambios parciales. Mandá "version" para que falle (409) si alguien la modificó desde que la leíste. */
 export const PATCH = conApi<P>(async (req, { db, actor, params }) => {
   const id = exigirUuid(params.id);
   const { datos, version } = await interpretarCuerpoTarea(db, await leerJson(req), true);
@@ -24,7 +24,7 @@ export const PATCH = conApi<P>(async (req, { db, actor, params }) => {
   return NextResponse.json({ tarea: tareaJson(req, (await detalleTarea(db, id))!) });
 });
 
-/** DELETE — archiva (no borra): se puede restaurar desde la app. */
+/** DELETE: archiva (no borra): se puede restaurar desde la app. */
 export const DELETE = conApi<P>(async (req, { db, actor, params }) => {
   const id = exigirUuid(params.id);
   await archivarTarea(db, id, actor);

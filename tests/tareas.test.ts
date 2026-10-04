@@ -48,7 +48,7 @@ describe("crear tareas", () => {
   it("la clave externa evita duplicados cuando un agente reintenta", async () => {
     const { db, cliente } = await entorno();
     const agente = { tipo: "api" as const, id: "x", nombre: "Agente 2" };
-    const datos = { titulo: "Grilla de contenidos — Noviembre", clienteId: cliente.id, claveExterna: "grilla-2026-11" };
+    const datos = { titulo: "Grilla de contenidos: Noviembre", clienteId: cliente.id, claveExterna: "grilla-2026-11" };
     const [a, b] = await Promise.all([crearTarea(db, datos, agente), crearTarea(db, datos, agente)]);
     expect(a.tarea.id).toBe(b.tarea.id);
     expect([a.creada, b.creada].filter(Boolean)).toHaveLength(1);

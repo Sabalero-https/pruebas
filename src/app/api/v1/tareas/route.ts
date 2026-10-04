@@ -6,7 +6,7 @@ import { resolverArea, resolverCliente, resolverColaborador } from "@/lib/servic
 import { detalleTarea, listarTareas, type FiltrosTareas } from "@/lib/servicios/consultas";
 import { crearTarea } from "@/lib/servicios/tareas";
 
-/** GET /api/v1/tareas — filtros: cliente, area, responsable (o "sin"), estado (lista separada por comas o "todas"),
+/** GET /api/v1/tareas: filtros: cliente, area, responsable (o "sin"), estado (lista separada por comas o "todas"),
  *  prioridad, vence (vencida|hoy|semana|proxima|sin_fecha), vence_desde, vence_hasta, q, clave_externa, limite, offset */
 export const GET = conApi(async (req, { db }) => {
   const p = new URL(req.url).searchParams;
@@ -42,7 +42,7 @@ export const GET = conApi(async (req, { db }) => {
   });
 });
 
-/** POST /api/v1/tareas — crea una tarea. Con clave_externa es idempotente (200 si ya existía, 201 si se creó). */
+/** POST /api/v1/tareas: crea una tarea. Con clave_externa es idempotente (200 si ya existía, 201 si se creó). */
 export const POST = conApi(async (req, { db, actor }) => {
   const { datos } = await interpretarCuerpoTarea(db, await leerJson(req), false);
   const { tarea, creada } = await crearTarea(db, aDatosCreacion(datos), actor);

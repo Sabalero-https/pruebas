@@ -45,13 +45,13 @@ export default async function Equipo({ searchParams }: { searchParams: Promise<P
             const tareas = porPersona(col.id);
             const s = stats.get(col.id);
             return (
-              <section key={col.id ?? "sin"} className={cx("flex w-72 shrink-0 flex-col rounded-lg bg-slate-100/80 p-2", !col.activo && "ring-2 ring-red-200")}>
+              <section key={col.id ?? "sin"} className={cx("flex w-72 shrink-0 flex-col rounded-lg bg-stone-100/80 p-2", !col.activo && "ring-2 ring-red-200")}>
                 <header className="mb-2 flex items-center gap-2 px-1 pt-1">
                   <Avatar nombre={col.id ? col.nombre : null} />
                   <div className="min-w-0 flex-1">
                     <Link
                       href={`/pendientes?responsable=${col.id ?? "sin"}`}
-                      className="block truncate text-sm font-semibold text-slate-800 hover:underline"
+                      className="block truncate text-sm font-semibold text-stone-800 hover:underline"
                     >
                       {col.nombre}
                     </Link>
@@ -60,19 +60,19 @@ export default async function Equipo({ searchParams }: { searchParams: Promise<P
                 </header>
                 <div className="mb-2 grid grid-cols-4 gap-1 text-center">
                   {[
-                    ["Abiertas", s?.abiertas ?? 0, "text-slate-800"],
+                    ["Abiertas", s?.abiertas ?? 0, "text-stone-800"],
                     ["Vencidas", s?.vencidas ?? 0, "text-red-600"],
                     ["Semana", s?.semana ?? 0, "text-amber-700"],
                     ["Revisión", s?.enRevision ?? 0, "text-amber-700"],
                   ].map(([etiqueta, valor, color]) => (
                     <div key={etiqueta as string} className="rounded bg-white px-1 py-1.5">
-                      <div className={cx("text-base font-semibold tabular-nums", valor === 0 ? "text-slate-300" : (color as string))}>{valor}</div>
-                      <div className="text-[10px] uppercase tracking-wide text-slate-500">{etiqueta}</div>
+                      <div className={cx("text-base font-semibold tabular-nums", valor === 0 ? "text-stone-300" : (color as string))}>{valor}</div>
+                      <div className="text-[10px] uppercase tracking-wide text-stone-500">{etiqueta}</div>
                     </div>
                   ))}
                 </div>
                 <ol className="flex flex-col gap-1.5">
-                  {tareas.length === 0 && <li className="px-2 py-6 text-center text-xs text-slate-400">Sin tareas abiertas</li>}
+                  {tareas.length === 0 && <li className="px-2 py-6 text-center text-xs text-stone-400">Sin tareas abiertas</li>}
                   {tareas.map((t) => (
                     <TarjetaCompacta key={t.id} t={t} hoy={hoy} />
                   ))}
@@ -89,7 +89,7 @@ export default async function Equipo({ searchParams }: { searchParams: Promise<P
 function TarjetaCompacta({ t, hoy }: { t: FilaTarea; hoy: string }) {
   return (
     <li className="tarjeta p-2">
-      <Link href={`/tareas/${t.id}`} className="line-clamp-2 text-sm font-medium text-slate-800 hover:text-marca-700">
+      <Link href={`/tareas/${t.id}`} className="line-clamp-2 text-sm font-medium text-stone-800 hover:text-marca-700">
         {t.titulo}
       </Link>
       <div className="mt-1 flex items-center gap-2">

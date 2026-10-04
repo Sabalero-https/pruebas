@@ -42,7 +42,7 @@ export default async function Recurrentes() {
       />
       {esAdmin && (
         <details className="tarjeta mb-6 p-4" open={reglas.length === 0}>
-          <summary className="cursor-pointer text-sm font-semibold text-slate-800">+ Nueva tarea recurrente</summary>
+          <summary className="cursor-pointer text-sm font-semibold text-stone-800">+ Nueva tarea recurrente</summary>
           <div className="mt-4">
             <FormRegla catalogo={catalogo} />
           </div>
@@ -66,10 +66,10 @@ export default async function Recurrentes() {
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-slate-800">{r.titulo}</span>
-                      {!r.activa && <span className="rounded bg-slate-200 px-1.5 text-[11px] text-slate-600">Pausada</span>}
+                      <span className="font-medium text-stone-800">{r.titulo}</span>
+                      {!r.activa && <span className="rounded bg-stone-200 px-1.5 text-[11px] text-stone-600">Pausada</span>}
                     </div>
-                    <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
+                    <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone-500">
                       {cliente && <ChipCliente nombre={cliente.nombre} color={cliente.color} />}
                       <span>{describirFrecuencia(r)}</span>
                       {area && <span>{area.nombre}</span>}
@@ -79,10 +79,10 @@ export default async function Recurrentes() {
                     </div>
                     {avisos.length > 0 && <div className="mt-1 text-xs text-amber-700">⚠ {avisos.join(" · ")}</div>}
                   </div>
-                  <div className="text-right text-xs text-slate-500">
+                  <div className="text-right text-xs text-stone-500">
                     {r.activa ? (
                       <>
-                        Próxima: <span className="font-medium text-slate-700">{formatearFecha(r.proximaEn, hoy)}</span>
+                        Próxima: <span className="font-medium text-stone-700">{formatearFecha(r.proximaEn, hoy)}</span>
                       </>
                     ) : (
                       "No genera tareas"

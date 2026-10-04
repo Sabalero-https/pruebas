@@ -95,7 +95,7 @@ export function FilaTarea({
   return (
     <li
       className={cx(
-        "group flex flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-slate-100 px-3 py-2 last:border-b-0 hover:bg-slate-50/70 sm:flex-nowrap",
+        "group flex flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-stone-100 px-3 py-2 last:border-b-0 hover:bg-stone-50/70 sm:flex-nowrap",
         pendiente && "opacity-60",
       )}
     >
@@ -107,7 +107,7 @@ export function FilaTarea({
         onClick={() => cambiar({ estado: hecha ? "por_hacer" : "hecho" }, hecha ? "Tarea reabierta" : "¡Tarea terminada!")}
         className={cx(
           "flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full border text-[10px] transition",
-          hecha ? "border-emerald-500 bg-emerald-500 text-white" : "border-slate-300 text-transparent hover:border-emerald-500 hover:text-emerald-500",
+          hecha ? "border-emerald-500 bg-emerald-500 text-white" : "border-stone-300 text-transparent hover:border-emerald-500 hover:text-emerald-500",
         )}
       >
         ✓
@@ -117,13 +117,13 @@ export function FilaTarea({
         <div className="flex items-center gap-2">
           <Link
             href={`/tareas/${tarea.id}`}
-            className={cx("truncate text-sm font-medium text-slate-800 hover:text-marca-700", hecha && "text-slate-400 line-through")}
+            className={cx("truncate text-sm font-medium text-stone-800 hover:text-marca-700", hecha && "text-stone-400 line-through")}
           >
             {tarea.titulo}
           </Link>
           <InsigniaPrioridad prioridad={tarea.prioridad} />
         </div>
-        <div className="mt-0.5 flex items-center gap-2 text-xs text-slate-500">
+        <div className="mt-0.5 flex items-center gap-2 text-xs text-stone-500">
           {!ocultarCliente && (
             <ChipCliente nombre={tarea.clienteNombre} color={tarea.clienteColor} href={`/clientes/${tarea.clienteSlug}`} />
           )}
@@ -155,7 +155,7 @@ export function FilaTarea({
         <input
           type="date"
           aria-label="Vencimiento"
-          className="campo-mini w-full cursor-pointer text-transparent focus:text-slate-700 [&::-webkit-calendar-picker-indicator]:opacity-40"
+          className="campo-mini w-full cursor-pointer text-transparent focus:text-stone-700 [&::-webkit-calendar-picker-indicator]:opacity-40"
           value={tarea.venceEl ?? ""}
           disabled={pendiente}
           onChange={(e) => cambiar({ venceEl: e.target.value || null })}

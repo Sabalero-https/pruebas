@@ -1,4 +1,4 @@
-# Sumo Tareas
+# Sumo Growth · Tareas
 
 Gestor de tareas interno de Sumo Growth: reemplazo simple de ClickUp/Asana, pensado para una agencia con varios clientes y varios colaboradores.
 
@@ -11,7 +11,7 @@ Gestor de tareas interno de Sumo Growth: reemplazo simple de ClickUp/Asana, pens
 - **API REST** para los agentes de IA: ver [`docs/api.md`](docs/api.md).
 - **Importador de ClickUp**.
 
-El plan y el research del proyecto están en [`docs/plan-gestor-de-tareas.md`](docs/plan-gestor-de-tareas.md).
+El plan y el research están en [`docs/plan-gestor-de-tareas.md`](docs/plan-gestor-de-tareas.md). Para ponerla en producción, seguí [`docs/guia-implementacion.md`](docs/guia-implementacion.md).
 
 ## Probarlo en local (5 minutos)
 

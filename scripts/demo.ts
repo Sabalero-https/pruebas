@@ -55,14 +55,14 @@ const tareas: [DatosTarea, Actor, string?][] = [
   [{ titulo: "Enviar status semanal al cliente", clienteId: cafe.id, areaId: area("Entregables/Reportes"), responsableId: bruno.id, venceEl: d(1) }, admin],
   [{ titulo: "Configurar flujo de carrito abandonado", clienteId: cafe.id, areaId: area("Email/Automatizaciones"), venceEl: d(4), estado: "esperando_cliente", descripcion: "Esperando accesos a Klaviyo." }, admin],
   [{ titulo: "Conectar API de stock con Meta Catalog", clienteId: moto.id, areaId: area("Desarrollo/Conexiones"), responsableId: carla.id, venceEl: d(-1), prioridad: "urgente" }, admin],
-  [{ titulo: "Estructura de pauta — próximo mes", clienteId: moto.id, areaId: area("Pauta"), venceEl: d(6), estado: "en_revision", claveExterna: "demo:agente3:pauta" }, { tipo: "api", id: "demo", nombre: "Agente 3 — Pauta" }],
-  [{ titulo: "Grilla de contenidos — próximo mes", clienteId: moto.id, areaId: area("Planificación"), responsableId: carla.id, venceEl: d(3), estado: "en_revision", claveExterna: "demo:agente2:grilla" }, { tipo: "api", id: "demo", nombre: "Agente 2 — Grilla" }],
+  [{ titulo: "Estructura de pauta: próximo mes", clienteId: moto.id, areaId: area("Pauta"), venceEl: d(6), estado: "en_revision", claveExterna: "demo:agente3:pauta" }, { tipo: "api", id: "demo", nombre: "Agente 3 (Pauta)" }],
+  [{ titulo: "Grilla de contenidos: próximo mes", clienteId: moto.id, areaId: area("Planificación"), responsableId: carla.id, venceEl: d(3), estado: "en_revision", claveExterna: "demo:agente2:grilla" }, { tipo: "api", id: "demo", nombre: "Agente 2 (Grilla)" }],
   [{ titulo: "Nueva campaña de lanzamiento (URGENTE)", clienteId: moto.id, areaId: area("Producción Creativa"), prioridad: "urgente" }, admin],
   [{ titulo: "Auditoría SEO inicial", clienteId: lumen.id, areaId: area("SEO"), responsableId: ana.id, venceEl: d(9) }, admin],
   [{ titulo: "Calendario comercial del trimestre", clienteId: lumen.id, areaId: area("Planificación"), responsableId: ana.id, venceEl: d(2), estado: "en_curso" }, admin],
   [{ titulo: "Reporte mensual + P&L", clienteId: lumen.id, areaId: area("Entregables/Reportes"), responsableId: bruno.id, venceEl: d(12), prioridad: "alta" }, admin],
   [{ titulo: "Ideas de colaboración con influencers", clienteId: lumen.id, areaId: area("Producción Creativa"), estado: "backlog" }, admin],
-  [{ titulo: "SOP — Onboarding de clientes", clienteId: interno.id, areaId: area("Estrategia-Ops"), responsableId: ana.id, venceEl: d(5) }, admin],
+  [{ titulo: "SOP: Onboarding de clientes", clienteId: interno.id, areaId: area("Estrategia-Ops"), responsableId: ana.id, venceEl: d(5) }, admin],
   [{ titulo: "Facturación del mes", clienteId: interno.id, areaId: area("Finanzas"), responsableId: ana.id, venceEl: d(-3), prioridad: "alta" }, admin],
   [{ titulo: "Propuesta para prospecto e-commerce", clienteId: interno.id, areaId: area("Prospección/Nuevos clientes"), responsableId: carla.id, venceEl: d(7) }, admin],
   [{ titulo: "Política de privacidad", clienteId: interno.id, areaId: area("Estrategia-Ops"), responsableId: bruno.id }, admin, "hecho"],
@@ -79,7 +79,7 @@ for (const [datos, actor, estadoFinal] of tareas) {
 }
 
 await crearRegla(db, { titulo: "Daily Forecast", clienteId: cafe.id, areaId: area("Entregables/Reportes"), responsableId: bruno.id, frecuencia: "diaria_habil", prioridad: "alta" }, admin);
-await crearRegla(db, { titulo: "Optimización semanal — {fecha}", clienteId: moto.id, areaId: area("Pauta"), responsableId: carla.id, frecuencia: "semanal", diaSemana: 1, diasParaVencer: 1 }, admin);
+await crearRegla(db, { titulo: "Optimización semanal {fecha}", clienteId: moto.id, areaId: area("Pauta"), responsableId: carla.id, frecuencia: "semanal", diaSemana: 1, diasParaVencer: 1 }, admin);
 await crearRegla(db, { titulo: "Reporte mensual {mes}", clienteId: lumen.id, areaId: area("Entregables/Reportes"), responsableId: ana.id, frecuencia: "mensual", diaMes: 1, diasParaVencer: 5 }, admin);
 await generarRecurrentes(db);
 

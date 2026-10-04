@@ -41,31 +41,31 @@ export default async function Clientes() {
             <Link key={c.id} href={`/clientes/${c.slug}`} className="tarjeta block p-4 transition hover:border-marca-500 hover:shadow">
               <div className="flex items-center gap-2">
                 <span className="h-3 w-3 rounded" style={{ backgroundColor: c.color }} />
-                <h2 className="truncate font-semibold text-slate-900">{c.nombre}</h2>
-                {c.esInterno && <span className="rounded bg-slate-100 px-1.5 text-[11px] text-slate-500">Interno</span>}
+                <h2 className="truncate font-semibold text-stone-900">{c.nombre}</h2>
+                {c.esInterno && <span className="rounded bg-stone-100 px-1.5 text-[11px] text-stone-500">Interno</span>}
                 {c.estado === "pausado" && <span className="rounded bg-amber-100 px-1.5 text-[11px] text-amber-800">Pausado</span>}
                 <span
                   title={salud === "rojo" ? "Tiene tareas vencidas" : salud === "ambar" ? "Hay cosas esperando revisión o al cliente" : "Al día"}
                   className={cx(
                     "ml-auto h-2.5 w-2.5 rounded-full",
-                    salud === "rojo" ? "bg-red-500" : salud === "ambar" ? "bg-amber-400" : salud === "verde" ? "bg-emerald-500" : "bg-slate-200",
+                    salud === "rojo" ? "bg-red-500" : salud === "ambar" ? "bg-amber-400" : salud === "verde" ? "bg-emerald-500" : "bg-stone-200",
                   )}
                 />
               </div>
               <div className="mt-3 grid grid-cols-4 gap-2 text-center">
                 {[
-                  ["Abiertas", s?.abiertas ?? 0, "text-slate-800"],
+                  ["Abiertas", s?.abiertas ?? 0, "text-stone-800"],
                   ["Vencidas", s?.vencidas ?? 0, "text-red-600"],
                   ["Revisión", s?.enRevision ?? 0, "text-amber-700"],
                   ["Esp. cliente", s?.esperandoCliente ?? 0, "text-fuchsia-700"],
                 ].map(([etiqueta, valor, color]) => (
                   <div key={etiqueta as string}>
-                    <div className={cx("text-lg font-semibold tabular-nums", valor === 0 ? "text-slate-300" : (color as string))}>{valor}</div>
-                    <div className="text-[10px] uppercase tracking-wide text-slate-500">{etiqueta}</div>
+                    <div className={cx("text-lg font-semibold tabular-nums", valor === 0 ? "text-stone-300" : (color as string))}>{valor}</div>
+                    <div className="text-[10px] uppercase tracking-wide text-stone-500">{etiqueta}</div>
                   </div>
                 ))}
               </div>
-              <div className="mt-3 flex items-center gap-2 border-t border-slate-100 pt-3 text-xs text-slate-500">
+              <div className="mt-3 flex items-center gap-2 border-t border-stone-100 pt-3 text-xs text-stone-500">
                 <Avatar nombre={responsable?.nombre ?? null} tamano="sm" />
                 <span className="truncate">{responsable ? responsable.nombre : "Sin responsable de cuenta"}</span>
                 <span className="ml-auto whitespace-nowrap">
@@ -81,11 +81,11 @@ export default async function Clientes() {
       </div>
       {archivados.length > 0 && (
         <details className="mt-8">
-          <summary className="cursor-pointer text-sm text-slate-500">Clientes archivados ({archivados.length})</summary>
+          <summary className="cursor-pointer text-sm text-stone-500">Clientes archivados ({archivados.length})</summary>
           <ul className="mt-2 flex flex-wrap gap-2">
             {archivados.map((c) => (
               <li key={c.id}>
-                <Link href={`/clientes/${c.slug}`} className="rounded-md border border-slate-200 bg-white px-2 py-1 text-sm text-slate-500 hover:text-slate-800">
+                <Link href={`/clientes/${c.slug}`} className="rounded-md border border-stone-200 bg-white px-2 py-1 text-sm text-stone-500 hover:text-stone-800">
                   {c.nombre}
                 </Link>
               </li>

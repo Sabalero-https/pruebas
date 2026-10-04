@@ -1,12 +1,38 @@
 @import "tailwindcss";
+@import "@fontsource-variable/montserrat";
+@import "@fontsource-variable/inter";
+
+/*
+ * Identidad Sumo Growth (ver CLAUDE.md, sección "Marca").
+ * Paleta: rojo #C62828 (acentos, botones, sello), beige #F2E8D9 (fondo claro), negro #111111 (fondo oscuro y texto).
+ * Para cambiar la marca alcanza con tocar estas variables.
+ */
+/* Solo los glifos 成 y 長 de Noto Serif JP (OFL, ver public/fonts): el sello se ve igual aunque la PC no tenga fuentes japonesas. */
+@font-face {
+  font-family: "Sello Kanji";
+  src: url("/fonts/sello-kanji.woff2") format("woff2");
+  font-weight: 700;
+  font-display: block;
+  unicode-range: U+6210, U+9577;
+}
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --color-marca-50: #eef2ff;
-  --color-marca-100: #e0e7ff;
-  --color-marca-500: #6366f1;
-  --color-marca-600: #4f46e5;
-  --color-marca-700: #4338ca;
+  /* Cuerpo: sans geométrica limpia. Títulos y wordmark: tipografía de la marca. */
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* "SumoGrowth" es la tipografía custom de trazo tipo tinta: si se agrega con @font-face, se usa sola. */
+  --font-marca: "SumoGrowth", "Montserrat Variable", "Montserrat", ui-sans-serif, sans-serif;
+  --font-sello: "Sello Kanji", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-titulo: "Montserrat Variable", "Montserrat", ui-sans-serif, sans-serif;
+
+  --color-marca-50: #fbeceb;
+  --color-marca-100: #f6d6d4;
+  --color-marca-500: #c62828;
+  --color-marca-600: #c62828;
+  --color-marca-700: #a31f1f;
+
+  --color-papel: #f2e8d9;
+  --color-papel-oscuro: #e6d8c2;
+  --color-tinta: #111111;
 }
 
 :root {
@@ -14,37 +40,42 @@
 }
 
 body {
-  background: #f8fafc;
-  color: #0f172a;
+  background: var(--color-papel);
+  color: var(--color-tinta);
+}
+
+h1,
+h2 {
+  font-family: var(--font-titulo);
 }
 
 @layer components {
-.campo {
-  @apply w-full rounded-md border border-slate-300 bg-white px-2.5 py-1.5 text-sm text-slate-900 shadow-sm outline-none transition focus:border-marca-500 focus:ring-2 focus:ring-marca-100 disabled:bg-slate-50 disabled:text-slate-500;
-}
+  .campo {
+    @apply w-full rounded-md border border-tinta/15 bg-white px-2.5 py-1.5 text-sm text-tinta outline-none transition focus:border-marca-500 focus:ring-2 focus:ring-marca-100 disabled:bg-papel/40 disabled:text-tinta/50;
+  }
 
-.campo-mini {
-  @apply rounded border border-transparent bg-transparent px-1.5 py-0.5 text-xs text-slate-700 outline-none transition hover:border-slate-300 hover:bg-white focus:border-marca-500 focus:bg-white;
-}
+  .campo-mini {
+    @apply rounded border border-transparent bg-transparent px-1.5 py-0.5 text-xs text-tinta/80 outline-none transition hover:border-tinta/20 hover:bg-white focus:border-marca-500 focus:bg-white;
+  }
 
-.etiqueta {
-  @apply mb-1 block text-xs font-medium text-slate-600;
-}
+  .etiqueta {
+    @apply mb-1 block text-xs font-medium text-tinta/60;
+  }
 
-.btn-primario {
-  @apply inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 bg-marca-600 text-white shadow-sm hover:bg-marca-700;
-}
-.btn-secundario {
-  @apply inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 border border-slate-300 bg-white text-slate-700 shadow-sm hover:bg-slate-50;
-}
-.btn-peligro {
-  @apply inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 border border-red-200 bg-white text-red-700 hover:bg-red-50;
-}
-.btn-fantasma {
-  @apply inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 text-slate-600 hover:bg-slate-100;
-}
+  .btn-primario {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50 bg-marca-600 text-white hover:bg-marca-700;
+  }
+  .btn-secundario {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 border border-tinta/20 bg-white text-tinta hover:border-tinta/40;
+  }
+  .btn-peligro {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 border border-marca-500/30 bg-white text-marca-700 hover:bg-marca-50;
+  }
+  .btn-fantasma {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 text-tinta/70 hover:bg-tinta/5;
+  }
 
-.tarjeta {
-  @apply rounded-lg border border-slate-200 bg-white shadow-sm;
-}
+  .tarjeta {
+    @apply rounded-lg border border-tinta/10 bg-white;
+  }
 }

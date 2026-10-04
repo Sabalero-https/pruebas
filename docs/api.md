@@ -60,7 +60,7 @@ Por defecto devuelve las tareas **abiertas** (no hechas ni archivadas), ordenada
 
 ```json
 {
-  "titulo": "Grilla de contenidos — Noviembre 2026",
+  "titulo": "Grilla de contenidos Noviembre 2026",
   "cliente": "Flex Sports",
   "area": "Planificación",
   "responsable": null,

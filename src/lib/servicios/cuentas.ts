@@ -96,7 +96,7 @@ export async function configuracionInicial(
       .values({ nombre, email, rol: "admin", passwordHash: await hashPassword(datos.password) })
       .returning();
     const sistema: Actor = { tipo: "sistema", nombre: "Sistema" };
-    await crearCliente(t, { nombre: datos.nombreInterno || "Sumo Growth (interno)", esInterno: true, color: "#0f172a" }, sistema);
+    await crearCliente(t, { nombre: datos.nombreInterno || "Sumo Growth (interno)", esInterno: true, color: "#111111" }, sistema);
     for (const area of AREAS_INICIALES) await crearArea(t, area, sistema);
     return admin;
   });

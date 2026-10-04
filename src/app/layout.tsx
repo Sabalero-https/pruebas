@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "Sumo Tareas", template: "%s · Sumo Tareas" },
-  description: "Gestor de tareas interno de Sumo Growth",
+  title: { default: "Tareas · Sumo Growth", template: "%s · Sumo Growth" },
+  description: "Gestor de tareas interno de Sumo Growth. Fuerza. Foco. Crecimiento.",
   robots: { index: false, follow: false },
 };
 

@@ -5,6 +5,7 @@ import { accionLogout } from "@/app/acciones";
 import { Navegacion } from "@/components/navegacion";
 import { ProveedorAvisos } from "@/components/avisos";
 import { Avatar } from "@/components/ui";
+import { Wordmark } from "@/components/marca";
 
 export default async function LayoutApp({ children }: { children: React.ReactNode }) {
   const { usuario } = await requerirUsuario();
@@ -14,12 +15,14 @@ export default async function LayoutApp({ children }: { children: React.ReactNod
   return (
     <ProveedorAvisos>
       <div className="md:flex">
-        <aside className="sticky top-0 z-20 bg-slate-900 px-3 py-3 md:flex md:h-screen md:w-56 md:shrink-0 md:flex-col md:py-5">
+        <aside className="sticky top-0 z-20 bg-tinta px-3 py-3 md:flex md:h-screen md:w-60 md:shrink-0 md:flex-col md:py-6">
           <div className="mb-3 flex items-center gap-2 px-2.5 md:mb-6">
-            <span className="flex h-7 w-7 items-center justify-center rounded-md bg-marca-500 text-sm font-bold text-white">S</span>
-            <span className="text-sm font-semibold text-white">Sumo Tareas</span>
+            <div className="flex flex-col gap-1">
+              <Wordmark variante="oscuro" tamano="sm" />
+              <span className="hidden text-[10px] font-semibold uppercase tracking-[0.35em] text-white/50 md:block">Tareas</span>
+            </div>
             <form action={accionLogout} className="ml-auto md:hidden">
-              <button className="text-xs text-slate-400 hover:text-white">Salir</button>
+              <button className="text-xs text-stone-400 hover:text-white">Salir</button>
             </form>
           </div>
           <Navegacion esAdmin={usuario.rol === "admin"} />
@@ -28,7 +31,7 @@ export default async function LayoutApp({ children }: { children: React.ReactNod
             <div className="min-w-0 flex-1">
               <div className="truncate text-sm text-white">{usuario.nombre}</div>
               <form action={accionLogout}>
-                <button className="text-xs text-slate-400 hover:text-white">Cerrar sesión</button>
+                <button className="text-xs text-stone-400 hover:text-white">Cerrar sesión</button>
               </form>
             </div>
           </div>

@@ -71,10 +71,10 @@ export function ListaTareas({
       {agrupar(filas, agruparPor, hoy).map((g) => (
         <section key={g.clave}>
           {g.titulo && (
-            <h2 className={cx("mb-1.5 flex items-center gap-2 px-1 text-xs font-semibold uppercase tracking-wide", g.destacado ? "text-red-600" : "text-slate-500")}>
+            <h2 className={cx("mb-1.5 flex items-center gap-2 px-1 text-xs font-semibold uppercase tracking-wide", g.destacado ? "text-red-600" : "text-stone-500")}>
               {g.color && <span className="h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: g.color }} />}
               {g.titulo}
-              <span className="rounded-full bg-slate-200/70 px-1.5 text-[11px] font-medium text-slate-600">{g.filas.length}</span>
+              <span className="rounded-full bg-stone-200/70 px-1.5 text-[11px] font-medium text-stone-600">{g.filas.length}</span>
             </h2>
           )}
           <ul className={cx("tarjeta overflow-hidden", g.destacado && "border-red-200")}>

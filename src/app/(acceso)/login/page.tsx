@@ -13,7 +13,7 @@ export default async function Login() {
   if (await usuarioActual()) redirect("/");
   return (
     <>
-      <h1 className="mb-4 text-lg font-semibold text-slate-900">Ingresar</h1>
+      <h1 className="mb-4 text-lg font-semibold text-stone-900">Ingresar</h1>
       <FormAcceso accion={accionLogin} boton="Ingresar">
         <div>
           <label className="etiqueta" htmlFor="email">
@@ -28,7 +28,7 @@ export default async function Login() {
           <input id="password" name="password" type="password" required autoComplete="current-password" className="campo" />
         </div>
       </FormAcceso>
-      <p className="mt-4 text-center text-xs text-slate-500">¿Te olvidaste la contraseña? Pedile a un admin un link nuevo.</p>
+      <p className="mt-4 text-center text-xs text-stone-500">¿Te olvidaste la contraseña? Pedile a un admin un link nuevo.</p>
     </>
   );
 }

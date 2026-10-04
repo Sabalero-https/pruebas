@@ -55,7 +55,7 @@ export default async function PaginaCliente({
   return (
     <>
       <div className="mb-2 text-sm">
-        <Link href="/clientes" className="text-slate-500 hover:text-slate-800">
+        <Link href="/clientes" className="text-stone-500 hover:text-stone-800">
           ← Clientes
         </Link>
       </div>
@@ -63,12 +63,12 @@ export default async function PaginaCliente({
         titulo={cliente.nombre}
         descripcion={`Responsable de cuenta: ${responsable?.nombre ?? "sin asignar"}`}
         acciones={
-          <div className="inline-flex rounded-md border border-slate-300 bg-white p-0.5 text-sm shadow-sm">
+          <div className="inline-flex rounded-md border border-stone-300 bg-white p-0.5 text-sm shadow-sm">
             {(["lista", "tablero"] as const).map((v) => (
               <Link
                 key={v}
                 href={v === "tablero" ? `${base}?vista=tablero` : base}
-                className={cx("rounded px-3 py-1", vista === v ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-50")}
+                className={cx("rounded px-3 py-1", vista === v ? "bg-tinta text-white" : "text-stone-600 hover:bg-stone-50")}
               >
                 {v === "lista" ? "Por área" : "Tablero"}
               </Link>
@@ -77,7 +77,7 @@ export default async function PaginaCliente({
         }
       />
       {cliente.estado !== "activo" && (
-        <p className={cx("mb-4 rounded-md px-3 py-2 text-sm", cliente.estado === "archivado" ? "bg-slate-200 text-slate-700" : "bg-amber-50 text-amber-800")}>
+        <p className={cx("mb-4 rounded-md px-3 py-2 text-sm", cliente.estado === "archivado" ? "bg-stone-200 text-stone-700" : "bg-amber-50 text-amber-800")}>
           {cliente.estado === "archivado"
             ? "Cliente archivado: no se le pueden cargar tareas nuevas."
             : "Cliente pausado: sus tareas recurrentes no se generan hasta que se reactive."}

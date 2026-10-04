@@ -50,12 +50,12 @@ export default async function Pendientes({ searchParams }: { searchParams: Promi
         titulo="Pendientes de la agencia"
         descripcion="Todas las tareas abiertas de todos los clientes y colaboradores."
         acciones={
-          <div className="inline-flex rounded-md border border-slate-300 bg-white p-0.5 text-sm shadow-sm">
+          <div className="inline-flex rounded-md border border-stone-300 bg-white p-0.5 text-sm shadow-sm">
             {(["lista", "tablero"] as const).map((v) => (
               <Link
                 key={v}
                 href={urlVista(v)}
-                className={cx("rounded px-3 py-1", vista === v ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-50")}
+                className={cx("rounded px-3 py-1", vista === v ? "bg-tinta text-white" : "text-stone-600 hover:bg-stone-50")}
               >
                 {v === "lista" ? "Lista" : "Tablero"}
               </Link>

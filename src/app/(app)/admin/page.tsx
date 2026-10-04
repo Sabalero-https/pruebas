@@ -42,14 +42,14 @@ export default async function Admin({ searchParams }: { searchParams: Promise<{ 
   return (
     <>
       <EncabezadoPagina titulo="Administración" />
-      <nav className="mb-6 flex gap-1 border-b border-slate-200">
+      <nav className="mb-6 flex gap-1 border-b border-stone-200">
         {SECCIONES.map((x) => (
           <Link
             key={x.clave}
             href={`/admin?seccion=${x.clave}`}
             className={cx(
               "-mb-px border-b-2 px-3 py-2 text-sm",
-              seccion === x.clave ? "border-marca-600 font-medium text-marca-700" : "border-transparent text-slate-500 hover:text-slate-800",
+              seccion === x.clave ? "border-marca-600 font-medium text-marca-700" : "border-transparent text-stone-500 hover:text-stone-800",
             )}
           >
             {x.etiqueta}
@@ -97,30 +97,30 @@ async function SeccionEquipo({ cat, usuarioId }: { cat: Cat; usuarioId: string }
             </select>
           </div>
         </Formulario>
-        <p className="mt-2 text-xs text-slate-500">
+        <p className="mt-2 text-xs text-stone-500">
           Se genera un link (válido 7 días) para que la persona elija su contraseña. Mandáselo por WhatsApp o mail.
         </p>
       </section>
 
-      <ul className="tarjeta divide-y divide-slate-100">
+      <ul className="tarjeta divide-y divide-stone-100">
         {cat.colaboradores.map((c) => (
-          <li key={c.id} className={cx("p-4", !c.activo && "bg-slate-50")}>
+          <li key={c.id} className={cx("p-4", !c.activo && "bg-stone-50")}>
             <div className="flex flex-wrap items-center gap-3">
               <Avatar nombre={c.nombre} />
               <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-800">
+                <div className="flex items-center gap-2 text-sm font-medium text-stone-800">
                   {c.nombre}
-                  {c.id === usuarioId && <span className="text-xs font-normal text-slate-400">(vos)</span>}
-                  <span className={cx("rounded px-1.5 text-[11px] font-normal", c.rol === "admin" ? "bg-marca-100 text-marca-700" : "bg-slate-100 text-slate-600")}>
+                  {c.id === usuarioId && <span className="text-xs font-normal text-stone-400">(vos)</span>}
+                  <span className={cx("rounded px-1.5 text-[11px] font-normal", c.rol === "admin" ? "bg-marca-100 text-marca-700" : "bg-stone-100 text-stone-600")}>
                     {c.rol === "admin" ? "Admin" : "Miembro"}
                   </span>
                   {!c.activo ? (
-                    <span className="rounded bg-slate-200 px-1.5 text-[11px] font-normal text-slate-600">Inactivo</span>
+                    <span className="rounded bg-stone-200 px-1.5 text-[11px] font-normal text-stone-600">Inactivo</span>
                   ) : c.pendiente ? (
                     <span className="rounded bg-amber-100 px-1.5 text-[11px] font-normal text-amber-800">Invitación pendiente</span>
                   ) : null}
                 </div>
-                <div className="text-xs text-slate-500">
+                <div className="text-xs text-stone-500">
                   {c.email} · {cuenta.get(c.id) ?? 0} tareas abiertas
                 </div>
               </div>
@@ -224,16 +224,16 @@ function SeccionClientes({ cat }: { cat: Cat }) {
           {camposCliente()}
         </Formulario>
       </section>
-      <ul className="tarjeta divide-y divide-slate-100">
+      <ul className="tarjeta divide-y divide-stone-100">
         {cat.clientes.map((c) => (
-          <li key={c.id} className={cx("p-4", c.estado === "archivado" && "bg-slate-50")}>
+          <li key={c.id} className={cx("p-4", c.estado === "archivado" && "bg-stone-50")}>
             <div className="flex flex-wrap items-center gap-3">
               <span className="h-3 w-3 rounded" style={{ backgroundColor: c.color }} />
-              <Link href={`/clientes/${c.slug}`} className="flex-1 text-sm font-medium text-slate-800 hover:underline">
+              <Link href={`/clientes/${c.slug}`} className="flex-1 text-sm font-medium text-stone-800 hover:underline">
                 {c.nombre}
-                {c.esInterno && <span className="ml-2 text-xs font-normal text-slate-400">interno</span>}
+                {c.esInterno && <span className="ml-2 text-xs font-normal text-stone-400">interno</span>}
               </Link>
-              <span className="text-xs text-slate-500">{c.estado === "activo" ? "Activo" : c.estado === "pausado" ? "Pausado" : "Archivado"}</span>
+              <span className="text-xs text-stone-500">{c.estado === "activo" ? "Activo" : c.estado === "pausado" ? "Pausado" : "Archivado"}</span>
               {c.estado !== "activo" && (
                 <BotonAccion accion={accionEstadoCliente.bind(null, c.id, "activo")} className="btn-fantasma text-xs" exito="Cliente activo">
                   Activar
@@ -277,9 +277,9 @@ function SeccionAreas({ cat }: { cat: Cat }) {
           <input name="nombre" required placeholder="Ej: SEO" className="campo max-w-xs" />
         </Formulario>
       </section>
-      <ul className="tarjeta divide-y divide-slate-100">
+      <ul className="tarjeta divide-y divide-stone-100">
         {cat.areas.map((a) => (
-          <li key={a.id} className={cx("flex flex-wrap items-end gap-3 p-3", !a.activa && "bg-slate-50")}>
+          <li key={a.id} className={cx("flex flex-wrap items-end gap-3 p-3", !a.activa && "bg-stone-50")}>
             <Formulario accion={accionGuardarArea} resetear={false} className="flex flex-1 flex-wrap items-end gap-2">
               <input type="hidden" name="id" value={a.id} />
               <div className="min-w-48 flex-1">
@@ -312,42 +312,42 @@ async function SeccionApi() {
     <div className="space-y-6">
       <section className="tarjeta p-4">
         <h2 className="mb-1 text-sm font-semibold">Nuevo token</h2>
-        <p className="mb-3 text-xs text-slate-500">Creá un token por agente o integración, así se puede revocar uno sin afectar a los demás.</p>
+        <p className="mb-3 text-xs text-stone-500">Creá un token por agente o integración, así se puede revocar uno sin afectar a los demás.</p>
         <Formulario accion={accionCrearToken} boton="Crear token" className="flex flex-wrap gap-3">
-          <input name="nombre" required placeholder="Ej: Agente 2 — Grilla de contenidos" className="campo max-w-sm" />
+          <input name="nombre" required placeholder="Ej: Agente 2, Grilla de contenidos" className="campo max-w-sm" />
         </Formulario>
       </section>
-      <ul className="tarjeta divide-y divide-slate-100">
-        {tokens.length === 0 && <li className="p-4 text-sm text-slate-500">Todavía no hay tokens.</li>}
+      <ul className="tarjeta divide-y divide-stone-100">
+        {tokens.length === 0 && <li className="p-4 text-sm text-stone-500">Todavía no hay tokens.</li>}
         {tokens.map((t) => (
           <li key={t.id} className={cx("flex flex-wrap items-center gap-3 p-3 text-sm", !t.activo && "opacity-50")}>
-            <span className="flex-1 font-medium text-slate-800">{t.nombre}</span>
-            <code className="text-xs text-slate-500">{t.prefijo}…</code>
-            <span className="text-xs text-slate-500">{t.ultimoUso ? `Último uso: ${fecha.format(t.ultimoUso)}` : "Sin usar"}</span>
+            <span className="flex-1 font-medium text-stone-800">{t.nombre}</span>
+            <code className="text-xs text-stone-500">{t.prefijo}…</code>
+            <span className="text-xs text-stone-500">{t.ultimoUso ? `Último uso: ${fecha.format(t.ultimoUso)}` : "Sin usar"}</span>
             {t.activo ? (
               <BotonAccion accion={accionRevocarToken.bind(null, t.id)} confirmar={`¿Revocar "${t.nombre}"? El agente deja de poder usar la API.`} className="btn-fantasma text-xs text-red-600" exito="Token revocado">
                 Revocar
               </BotonAccion>
             ) : (
-              <span className="text-xs text-slate-500">Revocado</span>
+              <span className="text-xs text-stone-500">Revocado</span>
             )}
           </li>
         ))}
       </ul>
-      <section className="tarjeta p-4 text-sm text-slate-700">
+      <section className="tarjeta p-4 text-sm text-stone-700">
         <h2 className="mb-2 text-sm font-semibold">Cómo lo usa un agente</h2>
-        <pre className="overflow-x-auto rounded-md bg-slate-900 p-3 text-xs leading-relaxed text-slate-100">{`curl -X POST $APP_URL/api/v1/tareas \\
+        <pre className="overflow-x-auto rounded-md bg-stone-900 p-3 text-xs leading-relaxed text-stone-100">{`curl -X POST $APP_URL/api/v1/tareas \\
   -H "Authorization: Bearer sg_..." \\
   -H "Content-Type: application/json" \\
   -d '{
-    "titulo": "Grilla de contenidos — Noviembre 2026",
+    "titulo": "Grilla de contenidos Noviembre 2026",
     "cliente": "Flex Sports",
     "area": "Planificación",
     "estado": "en revisión",
     "vence_el": "2026-10-28",
     "clave_externa": "agente2:grilla:2026-11"
   }'`}</pre>
-        <p className="mt-2 text-xs text-slate-500">
+        <p className="mt-2 text-xs text-stone-500">
           Cliente, área y responsable aceptan id, slug, nombre o email. Con <code>clave_externa</code> un reintento devuelve la misma tarea en vez de duplicarla.
           La referencia completa está en <code>docs/api.md</code>.
         </p>

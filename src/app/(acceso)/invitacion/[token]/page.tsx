@@ -13,8 +13,8 @@ export default async function Invitacion({ params }: { params: Promise<{ token: 
   if (!persona) {
     return (
       <>
-        <h1 className="text-lg font-semibold text-slate-900">Link inválido</h1>
-        <p className="mt-2 text-sm text-slate-600">Este link ya se usó o venció. Pedile uno nuevo a un admin.</p>
+        <h1 className="text-lg font-semibold text-stone-900">Link inválido</h1>
+        <p className="mt-2 text-sm text-stone-600">Este link ya se usó o venció. Pedile uno nuevo a un admin.</p>
         <Link href="/login" className="btn-secundario mt-4 w-full">
           Ir al ingreso
         </Link>
@@ -23,8 +23,8 @@ export default async function Invitacion({ params }: { params: Promise<{ token: 
   }
   return (
     <>
-      <h1 className="text-lg font-semibold text-slate-900">Hola, {persona.nombre.split(" ")[0]}</h1>
-      <p className="mb-4 mt-1 text-sm text-slate-500">
+      <h1 className="text-lg font-semibold text-stone-900">Hola, {persona.nombre.split(" ")[0]}</h1>
+      <p className="mb-4 mt-1 text-sm text-stone-500">
         Elegí tu contraseña para entrar como <strong>{persona.email}</strong>.
       </p>
       <FormAcceso accion={accionAceptarInvitacion} boton="Guardar y entrar">

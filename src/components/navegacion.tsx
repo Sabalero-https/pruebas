@@ -29,11 +29,13 @@ export function Navegacion({ esAdmin }: { esAdmin: boolean }) {
           key={i.href}
           href={i.href}
           className={cx(
-            "flex shrink-0 items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm transition",
-            activo(i.href) ? "bg-white/10 font-medium text-white" : "text-slate-300 hover:bg-white/5 hover:text-white",
+            "flex shrink-0 items-center gap-2.5 rounded-md border-l-2 px-2.5 py-1.5 text-sm transition",
+            activo(i.href)
+              ? "border-marca-600 bg-white/10 font-semibold text-white"
+              : "border-transparent text-stone-300 hover:bg-white/5 hover:text-white",
           )}
         >
-          <span className="w-4 text-center text-slate-400" aria-hidden>
+          <span className="w-4 text-center text-stone-400" aria-hidden>
             {i.icono}
           </span>
           {i.etiqueta}

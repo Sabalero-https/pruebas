@@ -15,7 +15,7 @@ export function FormRegla({ catalogo, regla, alGuardar }: { catalogo: CatalogoUI
       <div className="sm:col-span-2">
         <label className="etiqueta">Título</label>
         <input name="titulo" required maxLength={300} defaultValue={regla?.titulo} className="campo" placeholder="Reporte mensual {mes}" />
-        <p className="mt-1 text-[11px] text-slate-400">Podés usar {"{fecha}"}, {"{mes}"} o {"{anio}"} para que cada tarea tenga su fecha en el título.</p>
+        <p className="mt-1 text-[11px] text-stone-400">Podés usar {"{fecha}"}, {"{mes}"} o {"{anio}"} para que cada tarea tenga su fecha en el título.</p>
       </div>
       <div>
         <label className="etiqueta">Cliente</label>

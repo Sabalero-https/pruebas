@@ -21,7 +21,7 @@ export function ProveedorAvisos({ children }: { children: React.ReactNode }) {
           <div
             key={a.id}
             className={`pointer-events-auto rounded-md px-4 py-2.5 text-sm shadow-lg ${
-              a.tipo === "error" ? "bg-red-600 text-white" : "bg-slate-900 text-white"
+              a.tipo === "error" ? "bg-red-600 text-white" : "bg-tinta text-white"
             }`}
           >
             {a.texto}

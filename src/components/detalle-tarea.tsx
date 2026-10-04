@@ -41,7 +41,7 @@ export function PanelPropiedades({ t, catalogo }: { t: Props; catalogo: Catalogo
 
   const fila = (etiqueta: string, control: React.ReactNode) => (
     <div className="grid grid-cols-[6.5rem_1fr] items-center gap-2 py-1.5">
-      <span className="text-xs font-medium text-slate-500">{etiqueta}</span>
+      <span className="text-xs font-medium text-stone-500">{etiqueta}</span>
       {control}
     </div>
   );
@@ -146,15 +146,15 @@ export function EditorTarea({
     return (
       <div>
         <div className="flex items-start gap-3">
-          <h1 className="flex-1 text-xl font-semibold tracking-tight text-slate-900">{titulo}</h1>
+          <h1 className="flex-1 text-xl font-semibold tracking-tight text-stone-900">{titulo}</h1>
           {!archivada && (
             <button type="button" className="btn-secundario shrink-0" onClick={() => setEditando(true)}>
               Editar
             </button>
           )}
         </div>
-        <div className="mt-4 whitespace-pre-wrap text-sm leading-relaxed text-slate-700">
-          {descripcion || <span className="text-slate-400">Sin descripción.</span>}
+        <div className="mt-4 whitespace-pre-wrap text-sm leading-relaxed text-stone-700">
+          {descripcion || <span className="text-stone-400">Sin descripción.</span>}
         </div>
         {links.length > 0 && (
           <ul className="mt-4 flex flex-wrap gap-2">
@@ -164,7 +164,7 @@ export function EditorTarea({
                   href={l.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-slate-50 px-2 py-1 text-xs text-marca-700 hover:bg-marca-50"
+                  className="inline-flex items-center gap-1 rounded-md border border-stone-200 bg-stone-50 px-2 py-1 text-xs text-marca-700 hover:bg-marca-50"
                 >
                   🔗 {l.titulo}
                 </a>
@@ -246,7 +246,7 @@ export function FormComentario({ tareaId }: { tareaId: string }) {
         }}
       />
       <div className="flex items-center justify-between">
-        <span className="text-xs text-slate-400">Ctrl/⌘ + Enter para enviar</span>
+        <span className="text-xs text-stone-400">Ctrl/⌘ + Enter para enviar</span>
         <button className="btn-primario" disabled={pendiente}>
           {pendiente ? "Enviando…" : "Comentar"}
         </button>

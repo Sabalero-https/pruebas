@@ -96,7 +96,7 @@ export function planificarImportacion(
     tareas.push({
       claveExterna: `clickup:${t.id}`,
       titulo: limpiarNombre(t.name || "(sin título)").slice(0, 300),
-      descripcion: [cuerpo, notas.length ? `—\n${notas.join("\n")}` : ""].filter(Boolean).join("\n\n") || null,
+      descripcion: [cuerpo, notas.length ? `Notas de la importación:\n${notas.join("\n")}` : ""].filter(Boolean).join("\n\n") || null,
       cliente,
       area,
       estado,

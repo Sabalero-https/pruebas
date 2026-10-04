@@ -61,12 +61,12 @@ export function Kanban({ filas, hoy, ocultarCliente = false }: { filas: FilaTare
               setSobre(null);
               if (id) mover(id, col.valor, null);
             }}
-            className={cx("flex min-h-64 flex-col rounded-lg bg-slate-100/80 p-2 transition", sobre === col.valor && "bg-marca-50 ring-2 ring-marca-500/40")}
+            className={cx("flex min-h-64 flex-col rounded-lg bg-stone-100/80 p-2 transition", sobre === col.valor && "bg-marca-50 ring-2 ring-marca-500/40")}
           >
-            <h2 className="mb-2 flex items-center gap-2 px-1 text-xs font-semibold uppercase tracking-wide text-slate-600">
+            <h2 className="mb-2 flex items-center gap-2 px-1 text-xs font-semibold uppercase tracking-wide text-stone-600">
               <span className={cx("h-2 w-2 rounded-full", PUNTO_ESTADO[col.valor])} />
               {col.etiqueta}
-              <span className="ml-auto font-medium text-slate-400">{col.tarjetas.length}</span>
+              <span className="ml-auto font-medium text-stone-400">{col.tarjetas.length}</span>
             </h2>
             <ol className="flex flex-1 flex-col gap-2">
               {col.tarjetas.map((t) => (
@@ -91,7 +91,7 @@ export function Kanban({ filas, hoy, ocultarCliente = false }: { filas: FilaTare
                     arrastrando === t.id && "opacity-40",
                   )}
                 >
-                  <Link href={`/tareas/${t.id}`} className="line-clamp-3 text-sm font-medium text-slate-800 hover:text-marca-700">
+                  <Link href={`/tareas/${t.id}`} className="line-clamp-3 text-sm font-medium text-stone-800 hover:text-marca-700">
                     {t.titulo}
                   </Link>
                   {!ocultarCliente && (
@@ -99,7 +99,7 @@ export function Kanban({ filas, hoy, ocultarCliente = false }: { filas: FilaTare
                       <ChipCliente nombre={t.clienteNombre} color={t.clienteColor} />
                     </div>
                   )}
-                  {t.areaNombre && <div className="mt-0.5 truncate text-xs text-slate-400">{t.areaNombre}</div>}
+                  {t.areaNombre && <div className="mt-0.5 truncate text-xs text-stone-400">{t.areaNombre}</div>}
                   <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
                     <Avatar nombre={t.responsableNombre} tamano="sm" />
                     <TextoFecha fecha={t.venceEl} hoy={hoy} cerrada={t.estado === "hecho"} />

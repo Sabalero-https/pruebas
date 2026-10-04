@@ -12,8 +12,8 @@ export default async function Setup() {
   if (await hayColaboradores(await getDb())) redirect("/login");
   return (
     <>
-      <h1 className="text-lg font-semibold text-slate-900">Configuración inicial</h1>
-      <p className="mb-4 mt-1 text-sm text-slate-500">
+      <h1 className="text-lg font-semibold text-stone-900">Configuración inicial</h1>
+      <p className="mb-4 mt-1 text-sm text-stone-500">
         Creá el primer usuario administrador. También se crean el cliente interno y las áreas de trabajo.
       </p>
       <FormAcceso accion={accionSetup} boton="Crear y entrar">

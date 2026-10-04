@@ -101,7 +101,7 @@ export function Filtros({
       {mostrar.includes("vencimiento") &&
         select("vence", "Cualquier fecha", GRUPOS_VENCIMIENTO.map((g) => ({ valor: g.valor, etiqueta: g.etiqueta })))}
       {mostrar.includes("agrupar") && (
-        <label className="ml-auto flex items-center gap-1.5 text-xs text-slate-500">
+        <label className="ml-auto flex items-center gap-1.5 text-xs text-stone-500">
           Agrupar por
           <select
             className="campo w-auto"
