@@ -1,6 +1,8 @@
 # Plan: Gestor de tareas interno de Sumo Growth
 
 > Objetivo: reemplazar ClickUp/Asana por un panel propio, **simple**, integrado a nuestra web, pensado para una agencia que trabaja con varios clientes y varios colaboradores.
+>
+> **Estado:** el MVP (fases 1 a 3 y el importador de la fase 4) está implementado en este repositorio. Ver [§11](#11-estado-de-implementación-mvp) y el [README](../README.md).
 
 ---
 
@@ -376,3 +378,31 @@ Estimaciones para **1 desarrollador** a tiempo completo. Con dedicación parcial
 1. Revisar este documento con el equipo y responder §9.
 2. Hacer wireframes rápidos de los 4 paneles (Mis tareas, Por colaborador, Por cliente, Pendientes).
 3. Crear el proyecto (repo + Supabase + Vercel) y arrancar la **Fase 1**.
+
+---
+
+## 11. Estado de implementación (MVP)
+
+**Hecho:**
+- Fase 1, base: esquema de datos, login por invitación, ABM de colaboradores, clientes y áreas, y crear/editar tareas.
+- Fase 2, paneles: Mis tareas, Pendientes (filtros en la URL, agrupar, lista/tablero), Por colaborador, Por cliente, Kanban con arrastrar y soltar, y alta rápida con atajo `N`.
+- Fase 3:
+  - Comentarios e historial de cambios.
+  - Recurrentes (diaria hábil, semanal, mensual) con generación idempotente.
+  - API v1 con tokens por agente ([docs/api.md](api.md)).
+- Fase 4, migración: importador de ClickUp con simulación, normalización de estados y reintentos sin duplicar.
+- 60 tests automáticos sobre Postgres real, más un recorrido completo en navegador (escritorio y celular).
+
+**Cambios respecto al plan original:**
+
+| Plan | Implementado | Por qué |
+|---|---|---|
+| Supabase Auth | Login propio (email + contraseña, invitación por link) | Funciona en cualquier hosting y no ata el proyecto a un proveedor. Sigue siendo compatible con Supabase como base de datos. |
+| Supabase obligatorio | Cualquier Postgres vía `DATABASE_URL`. En local, PGlite (Postgres embebido) | Se prueba con `npm install && npm run dev`, sin instalar nada más. |
+| Row Level Security | Autorización en la capa de servicios (todo pasa por `src/lib/servicios`) | Con un equipo chico donde todos ven todo es suficiente. RLS se suma junto con el portal de clientes. |
+
+**Pendiente (fase 4 y 5):**
+- Correr el importador contra el ClickUp real (hace falta un token de API de ClickUp) y usar ambos sistemas en paralelo una semana.
+- Desplegar en el subdominio (decidir hosting y Postgres, ver §9).
+- Reconfigurar los agentes de IA para que usen la API nueva en vez de ClickUp.
+- Mejoras: resumen diario por mail, calendario, subtareas, adjuntos, plantillas, webhooks y servidor MCP.
